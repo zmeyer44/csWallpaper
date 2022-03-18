@@ -324,7 +324,7 @@ function App() {
           </a>
         </p>
       </div>
-      <div className="flex md:hidden justify-center items-center text-red-600 absolute top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
+      <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
         <h1 className="font-mono text-xl">Must view on Desktop</h1>
       </div>
     </div>
