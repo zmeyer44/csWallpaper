@@ -186,6 +186,15 @@ function App() {
       });
   };
 
+  const reset = () => {
+    setImage(null);
+    setOwner("Loading...");
+    setInput("");
+    setPhone("");
+    setGenerate(false);
+    setLoading(false);
+  };
+
   return (
     <div className="bg-dark min-h-screen flex flex-col justify-center items-center px-3">
       <h1 className="mb-4 text-6xl title text-center text-white sm:mb-6 md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
@@ -280,7 +289,7 @@ function App() {
             <canvas ref={canvasRef} className=""></canvas>
           </div>
           <button
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mt-4 rounded inline-flex items-center mx-auto"
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mt-4 rounded flex items-center mx-auto"
             onClick={downloadImage}
           >
             <svg
@@ -292,6 +301,12 @@ function App() {
             </svg>
             <span>Download</span>
           </button>
+          <p
+            className="text-red-600 font-mono underline mt-3 cursor-pointer"
+            onClick={reset}
+          >
+            reset
+          </p>
         </div>
       )}
 
