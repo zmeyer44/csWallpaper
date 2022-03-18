@@ -271,7 +271,12 @@ function App() {
         </form>
       ) : (
         <div className="flex flex-col justify-center items-center w-full">
-          <div className="flex justify-center scale-50 my-[-200px]">
+          <div
+            className="flex justify-center scale-50 my-[-200px]"
+            style={{
+              fontFamily: "Press Start 2P",
+            }}
+          >
             <canvas ref={canvasRef} className=""></canvas>
           </div>
           <button
@@ -299,8 +304,8 @@ function App() {
               alt="skull"
               src={`https://raw.githubusercontent.com/KobeLincoln/cryptoskull_stuff/main/exports/CS_Twitter_Header/${input}.png`}
               id="my-image"
-              width={10}
-              height={10}
+              width={100}
+              height={100}
             />
           )
         ) : null}
