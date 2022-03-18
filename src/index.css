@@ -12,3 +12,6 @@
 .title {
   font-family: "Robot Crush";
 }
+.active {
+  color: #d50000 !important;
+}

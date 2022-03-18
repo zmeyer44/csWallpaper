@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { HiHeart } from "react-icons/hi";
 import { fetchEnsName } from "../utils";
-const skullNation = require("../assets/skullnation.png");
+const wdts = require("../assets/wdts.png");
 const skull1 = require("../assets/skull_1.png");
 const skull2 = require("../assets/skull_2.png");
 const skull2b = require("../assets/skull_2b.png");
@@ -30,24 +30,17 @@ function Banner() {
 
   const canvasRef = useRef(null);
 
-  function get_bg_color() {
-    var img = document.getElementById("my-image");
-    if (img) {
-      var canvasImg = document.createElement("canvas");
-      canvasImg.width = img.width;
-      canvasImg.height = img.height;
-      canvasImg.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
-      var pixelData = canvasImg.getContext("2d").getImageData(0, 0, 1, 1).data;
+  function get_bg_color(img) {
+    var canvasImg = document.createElement("canvas");
+    canvasImg.width = img.width;
+    canvasImg.height = img.height;
+    canvasImg.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
+    var pixelData = canvasImg.getContext("2d").getImageData(0, 0, 1, 1).data;
 
-      return {
-        sum: pixelData[0] + pixelData[1] + pixelData[2],
-        bgColor: `rgb(${pixelData[0]},${pixelData[1]},${pixelData[2]})`,
-      };
-    } else
-      return {
-        sum: 200,
-        bgColor: lordsColors[input],
-      };
+    return {
+      sum: pixelData[0] + pixelData[1] + pixelData[2],
+      bgColor: `rgb(${pixelData[0]},${pixelData[1]},${pixelData[2]})`,
+    };
   }
   function get_pixel_color(img, x, y) {
     var canvasImg = document.createElement("canvas");
@@ -92,8 +85,11 @@ function Banner() {
     ctx.drawImage(img, 0, 0, w, h);
     var imageData = ctx.getImageData(0, 0, w, h);
     var eyeColor = ctx.getImageData(133, 147, 1, 1).data;
+    if (eyeColor[0] === 38 && eyeColor[1] === 50) {
+      eyeColor = [1, 1, 1, 0];
+    }
     var bonesColor = ctx.getImageData(63, 21, 1, 1).data;
-    var skullColor = ctx.getImageData(161, 168, 1, 1).data;
+    var skullColor = ctx.getImageData(119, 189, 1, 1).data;
 
     var pixel = imageData.data;
 
@@ -135,7 +131,8 @@ function Banner() {
 
     ctx.drawImage(img, 0, 0, w, h);
     var imageData = ctx.getImageData(0, 0, w, h);
-    var skullColor = ctx.getImageData(161, 168, 1, 1).data;
+    var skullColor = ctx.getImageData(119, 189, 1, 1).data;
+
     var pixel = imageData.data;
 
     var r = 0,
@@ -160,22 +157,19 @@ function Banner() {
 
   useEffect(() => {
     if (generate) {
-      const { bgColor, sum } = get_bg_color();
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       canvas.height = 360;
       canvas.width = 1500;
 
-      //Background Color
-      context.fillStyle = bgColor;
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
       //Skull 5
-      let s5 = new Image();
-      s5.src = image;
-      s5.onload = () => {
-        context.drawImage(s5, 1193, 55, 250, 250);
-        console.log();
+      let orig = new Image();
+      orig.src = image;
+      orig.onload = () => {
+        //Background Color
+        const { bgColor, sum } = get_bg_color(orig);
+        context.fillStyle = bgColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
 
         //Skull 1
         let s1 = new Image();
@@ -185,34 +179,48 @@ function Banner() {
         };
         //Skull 2
         let s2 = new Image();
-        s2.src = bonesCheck(s5) ? skull2b : skull2;
+        s2.src = bonesCheck(orig) ? skull2b : skull2;
         s2.onload = () => {
           context.drawImage(s2, 341, 55, 250, 250);
         };
         //Skull 3
         let s3 = new Image();
-        s3.src = removeSkullAndEyeColor(s5);
+        s3.src = removeSkullAndEyeColor(orig);
         s3.onload = () => {
           context.drawImage(s3, 625, 55, 250, 250);
         };
         //Skull 4
         let s4 = new Image();
-        s4.src = removeSkullColor(s5);
+        s4.src = removeSkullColor(orig);
         s4.onload = () => {
           context.drawImage(s4, 909, 55, 250, 250);
         };
-      };
+        //Skull 5
+        let s5 = new Image();
+        s5.src = image;
+        s5.onload = () => {
+          context.drawImage(s5, 1193, 55, 250, 250);
+        };
 
-      //Text
-      context.fillStyle = sum < 301 ? "#ffffff" : "#212121";
-      context.font = `18px 'Press Start 2P'`;
-      context.fillText(`CRYPTO SKULL #${input}`, 15, 35);
-      context.fillText(`OWNER: ${owner}`, 1100, 35);
-      //CS Logo
-      let csImage = new Image();
-      csImage.src = cs;
-      csImage.onload = () => {
-        context.drawImage(csImage, 1440, 300, 50, 50);
+        //WDTS
+        let wd = new Image();
+        wd.src = wdts;
+        wd.onload = () => {
+          context.filter = sum < 301 ? "invert(1)" : null;
+          context.drawImage(wd, 575, 305, 350, 50);
+        };
+        //CS Logo
+        let csImage = new Image();
+        csImage.src = cs;
+        csImage.onload = () => {
+          context.filter = sum < 301 ? "invert(1)" : null;
+          context.drawImage(csImage, 1440, 300, 50, 50);
+        };
+        //Text
+        context.fillStyle = sum < 301 ? "#ffffff" : "#212121";
+        context.font = `18px 'Press Start 2P'`;
+        context.fillText(`CRYPTO SKULL #${input}`, 15, 35);
+        context.fillText(`OWNER: ${owner}`, 1100, 35);
       };
     }
   }, [generate, owner]);
@@ -222,7 +230,7 @@ function Banner() {
 
     var url = canvas.toDataURL("image/png");
     var link = document.createElement("a");
-    link.download = "CSWallpaper.png";
+    link.download = "CSTwitterBanner.png";
     link.href = url;
     link.click();
   };
@@ -311,7 +319,7 @@ function Banner() {
       ) : (
         <div className="flex flex-col justify-center items-center w-full">
           <div
-            className="flex justify-center scale-50 my-[-200px]"
+            className="flex justify-center scale-50"
             style={{
               fontFamily: "Press Start 2P",
             }}
@@ -341,20 +349,6 @@ function Banner() {
       )}
 
       <div className="flex items-center mt-4">
-        {input ? (
-          lords.includes(input) ? null : (
-            <img
-              className="hidden"
-              crossOrigin="anonymous"
-              alt="skull"
-              src={`https://raw.githubusercontent.com/KobeLincoln/cryptoskull_stuff/main/exports/CS_Twitter_Header/${input}.png`}
-              id="my-image"
-              width={100}
-              height={100}
-            />
-          )
-        ) : null}
-
         <p className="text-slate-500">Made with</p>
         <HiHeart className="mx-2 text-red-600" />
         <p className="text-slate-500">

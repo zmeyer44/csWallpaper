@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { HiHeart } from "react-icons/hi";
 import { fetchEnsName } from "../utils";
 const skullNation = require("../assets/skullnation.png");
@@ -338,6 +339,9 @@ function Index() {
             Zachm.eth
           </a>
         </p>
+      </div>
+      <div className="absolute top-0 right-0 text-red-500 hover:text-white font-mono pt-4 pr-4">
+        <Link to="/banner">Create Twitter Banner</Link>
       </div>
       <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
         <h1 className="font-mono text-xl">Must view on Desktop</h1>
