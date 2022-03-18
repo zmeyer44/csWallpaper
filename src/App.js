@@ -189,7 +189,7 @@ function App() {
   return (
     <div className="bg-slate-100 min-h-screen flex flex-col justify-center items-center px-3">
       <h1 className="mb-4 text-6xl title text-center sm:mb-6 md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
-        Lock Screen
+        CS Wallpaper
       </h1>
       {!generate ? (
         <form className="w-full max-w-lg bg-white rounded-lg py-6 px-3 flex flex-col justify-center shadow-md">
@@ -296,6 +296,7 @@ function App() {
             <img
               className="hidden"
               crossOrigin="anonymous"
+              alt="skull"
               src={`https://raw.githubusercontent.com/KobeLincoln/cryptoskull_stuff/main/exports/CS_Twitter_Header/${input}.png`}
               id="my-image"
               width={10}
@@ -305,12 +306,13 @@ function App() {
         ) : null}
 
         <p className="">Made with</p>
-        <img src={heart} className="w-4 h-4 mx-1" />
+        <img src={heart} className="w-4 h-4 mx-1" alt="heart" />
         <p>
           by{" "}
           <a
             href="https://twitter.com/zmeyer44"
             target="_blank"
+            rel="noreferrer"
             className="text-blue-600"
           >
             Zachm.eth
