@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Home from "./pages";
 import Banner from "./pages/banner";
+import Combine from "./pages/combine";
 import Header from "./components/Header";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="banner" element={<Banner />} />
+        <Route path="combine" element={<Combine />} />
       </Routes>
     </BrowserRouter>
   );

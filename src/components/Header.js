@@ -28,6 +28,7 @@ const Header = () => {
         <div className="hidden sm:flex space-x-8 pr-4">
           <HeaderLink label="Wallpaper" href="/" />
           <HeaderLink label="Banner" href="/banner" />
+          <HeaderLink label="Combine" href="/combine" />
         </div>
         <button
           className={`menu ${menuOpen} z-20 sm:hidden`}
@@ -46,6 +47,7 @@ const Header = () => {
       >
         <HeaderLink label="Wallpaper" href="/" large />
         <HeaderLink label="Banner" href="/banner" large />
+        <HeaderLink label="Combine" href="/combine" large />
       </nav>
     </header>
   );
