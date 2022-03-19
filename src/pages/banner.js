@@ -218,7 +218,7 @@ function Banner() {
         };
         //Text
         context.fillStyle = sum < 301 ? "#ffffff" : "#212121";
-        context.font = `25px 'Press Start 2P'`;
+        context.font = `25px 'PressStart2P'`;
         context.fillText(`CRYPTO SKULL #${input}`, 20, 45);
         context.fillText(`OWNER: ${owner}`, 950, 45);
       };
@@ -321,7 +321,7 @@ function Banner() {
           <div
             className="flex justify-center scale-50 mt-[-140px] mb-[-120px]"
             style={{
-              fontFamily: "Press Start 2P",
+              fontFamily: "PressStart2P",
             }}
           >
             <canvas ref={canvasRef} className=""></canvas>
@@ -361,11 +361,12 @@ function Banner() {
           >
             Zachm.eth
           </a>
+          <span className="tech text-dark">!</span>
         </p>
       </div>
-      <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
+      {/* <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
         <h1 className="font-mono text-xl">Must view on Desktop</h1>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -29,24 +29,17 @@ function Index() {
 
   const canvasRef = useRef(null);
 
-  function get_pixel_color() {
-    var img = document.getElementById("my-image");
-    if (img) {
-      var canvasImg = document.createElement("canvas");
-      canvasImg.width = img.width;
-      canvasImg.height = img.height;
-      canvasImg.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
-      var pixelData = canvasImg.getContext("2d").getImageData(0, 0, 1, 1).data;
+  function get_bg_color(img) {
+    var canvasImg = document.createElement("canvas");
+    canvasImg.width = img.width;
+    canvasImg.height = img.height;
+    canvasImg.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
+    var pixelData = canvasImg.getContext("2d").getImageData(0, 0, 1, 1).data;
 
-      return {
-        sum: pixelData[0] + pixelData[1] + pixelData[2],
-        bgColor: `rgb(${pixelData[0]},${pixelData[1]},${pixelData[2]})`,
-      };
-    } else
-      return {
-        sum: 200,
-        bgColor: lordsColors[input],
-      };
+    return {
+      sum: pixelData[0] + pixelData[1] + pixelData[2],
+      bgColor: `rgb(${pixelData[0]},${pixelData[1]},${pixelData[2]})`,
+    };
   }
 
   const updateName = async () => {
@@ -62,16 +55,11 @@ function Index() {
 
   useEffect(() => {
     if (generate) {
-      const { bgColor, sum } = get_pixel_color();
       const dimensions = JSON.parse(phone);
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       canvas.height = dimensions.height;
       canvas.width = dimensions.width;
-
-      //Background Color
-      context.fillStyle = bgColor;
-      context.fillRect(0, 0, canvas.width, canvas.height);
 
       //Skull Image
       let skullImage = new Image();
@@ -85,16 +73,30 @@ function Index() {
           canvas.width * 0.84,
           canvas.width * 0.84
         );
+        const { bgColor, sum } = get_bg_color(skullImage);
+        //Background Color
+        context.fillStyle = bgColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        //Redraw Skull
+        context.drawImage(
+          skullImage,
+          canvas.width * 0.08,
+          canvas.height * 0.39,
+          canvas.width * 0.84,
+          canvas.width * 0.84
+        );
+
         //Text
         context.fillStyle = sum < 301 ? "#ffffff" : "#212121";
-        context.font = `${canvas.width / 17.83}px 'Press Start 2P'`;
+        context.font = `${canvas.width / 17.83}px 'PressStart2P'`;
         context.fillText("CRYPTO", 15, canvas.height * 0.3);
         context.fillText("SKULL", 15, canvas.height * 0.3 + 36);
         context.fillText(`#${input}`, 15, canvas.height * 0.3 + 72);
         context.fillText("<WEB3>", canvas.width - 156, canvas.height * 0.3);
 
         //Bottom Text
-        context.font = `${canvas.width / 19.45}px 'Press Start 2P'`;
+        context.font = `${canvas.width / 19.45}px 'PressStart2P'`;
 
         context.fillText(
           "OWNER:",
@@ -284,7 +286,7 @@ function Index() {
           <div
             className="flex justify-center scale-50 my-[-200px]"
             style={{
-              fontFamily: "Press Start 2P",
+              fontFamily: "PressStart2P",
             }}
           >
             <canvas ref={canvasRef} className=""></canvas>
@@ -312,20 +314,6 @@ function Index() {
       )}
 
       <div className="flex items-center mt-4">
-        {input ? (
-          lords.includes(input) ? null : (
-            <img
-              className="hidden"
-              crossOrigin="anonymous"
-              alt="skull"
-              src={`https://raw.githubusercontent.com/KobeLincoln/cryptoskull_stuff/main/exports/CS_Twitter_Header/${input}.png`}
-              id="my-image"
-              width={100}
-              height={100}
-            />
-          )
-        ) : null}
-
         <p className="text-slate-500">Made with</p>
         <HiHeart className="mx-2 text-red-600" />
         <p className="text-slate-500">
@@ -338,14 +326,15 @@ function Index() {
           >
             Zachm.eth
           </a>
+          <span className="tech text-dark">!</span>
         </p>
       </div>
       <div className="absolute top-0 right-0 text-red-500 hover:text-white font-mono pt-4 pr-4">
         <Link to="/banner">Create Twitter Banner</Link>
       </div>
-      <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
+      {/* <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
         <h1 className="font-mono text-xl">Must view on Desktop</h1>
-      </div>
+      </div> */}
     </div>
   );
 }

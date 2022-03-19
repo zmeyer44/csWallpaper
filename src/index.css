@@ -8,9 +8,18 @@
   font-weight: 400;
   font-style: normal;
 }
+@font-face {
+  font-family: PressStart2P;
+  src: url("./assets/PressStart2P.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
 
 .title {
   font-family: "Robot Crush";
+}
+.tech {
+  font-family: "PressStart2P", "Press Start 2P", monospace;
 }
 .active {
   color: #d50000 !important;
