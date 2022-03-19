@@ -120,6 +120,7 @@ function Index() {
         let csImage = new Image();
         csImage.src = cs;
         csImage.onload = () => {
+          context.filter = sum < 301 ? "invert(1)" : null;
           context.drawImage(
             csImage,
             canvas.width - canvas.width * 0.1 - 35,
@@ -132,8 +133,8 @@ function Index() {
         //Skull Nation
         let skullNationImage = new Image();
         skullNationImage.src = skullNation;
-        context.filter = sum < 301 ? "invert(1)" : null;
         skullNationImage.onload = () => {
+          context.filter = sum < 301 ? "invert(1)" : null;
           context.drawImage(
             skullNationImage,
             canvas.width * 0.15,
