@@ -159,7 +159,7 @@ function Banner() {
     if (generate) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
-      canvas.height = 360;
+      canvas.height = 500;
       canvas.width = 1500;
 
       //Skull 5
@@ -175,31 +175,31 @@ function Banner() {
         let s1 = new Image();
         s1.src = skull1;
         s1.onload = () => {
-          context.drawImage(s1, 57, 55, 250, 250);
+          context.drawImage(s1, 40, 125, 275, 275);
         };
         //Skull 2
         let s2 = new Image();
         s2.src = bonesCheck(orig) ? skull2b : skull2;
         s2.onload = () => {
-          context.drawImage(s2, 341, 55, 250, 250);
+          context.drawImage(s2, 326.25, 125, 275, 275);
         };
         //Skull 3
         let s3 = new Image();
         s3.src = removeSkullAndEyeColor(orig);
         s3.onload = () => {
-          context.drawImage(s3, 625, 55, 250, 250);
+          context.drawImage(s3, 612.5, 125, 275, 275);
         };
         //Skull 4
         let s4 = new Image();
         s4.src = removeSkullColor(orig);
         s4.onload = () => {
-          context.drawImage(s4, 909, 55, 250, 250);
+          context.drawImage(s4, 898.75, 125, 275, 275);
         };
         //Skull 5
         let s5 = new Image();
         s5.src = image;
         s5.onload = () => {
-          context.drawImage(s5, 1193, 55, 250, 250);
+          context.drawImage(s5, 1185, 125, 275, 275);
         };
 
         //WDTS
@@ -207,20 +207,20 @@ function Banner() {
         wd.src = wdts;
         wd.onload = () => {
           context.filter = sum < 301 ? "invert(1)" : null;
-          context.drawImage(wd, 575, 305, 350, 50);
+          context.drawImage(wd, 540, 420, 420, 60);
         };
         //CS Logo
         let csImage = new Image();
         csImage.src = cs;
         csImage.onload = () => {
           context.filter = sum < 301 ? "invert(1)" : null;
-          context.drawImage(csImage, 1440, 300, 50, 50);
+          context.drawImage(csImage, 1410, 410, 70, 70);
         };
         //Text
         context.fillStyle = sum < 301 ? "#ffffff" : "#212121";
-        context.font = `18px 'Press Start 2P'`;
-        context.fillText(`CRYPTO SKULL #${input}`, 15, 35);
-        context.fillText(`OWNER: ${owner}`, 1100, 35);
+        context.font = `25px 'Press Start 2P'`;
+        context.fillText(`CRYPTO SKULL #${input}`, 20, 45);
+        context.fillText(`OWNER: ${owner}`, 950, 45);
       };
     }
   }, [generate, owner]);
@@ -319,7 +319,7 @@ function Banner() {
       ) : (
         <div className="flex flex-col justify-center items-center w-full">
           <div
-            className="flex justify-center scale-50"
+            className="flex justify-center scale-50 mt-[-140px] mb-[-120px]"
             style={{
               fontFamily: "Press Start 2P",
             }}
