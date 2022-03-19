@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { HiHeart } from "react-icons/hi";
 import { fetchEnsName } from "../utils";
 const skullNation = require("../assets/skullnation.png");
@@ -201,141 +201,150 @@ function Index() {
   };
 
   return (
-    <div className="bg-dark min-h-screen flex flex-col justify-center items-center px-3">
-      <h1 className="mb-4 text-6xl title text-center text-white sm:mb-6 md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
-        CS <span className="text-red-700">Wallpaper</span>
-      </h1>
-      {!generate ? (
-        <form className="w-full max-w-lg bg-zinc-800 rounded-lg py-6 px-3 flex flex-col justify-center shadow-md">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-slate-500 text-xs font-bold mb-2">
-              Skull ID
-            </label>
-            <input
-              className={`appearance-none block w-full bg-gray-200 placeholder-gray-800::placeholder text-gray-700 border ${
-                error && "border-red-500"
-              }  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
-              type="text"
-              name="TokenID"
-              value={input}
-              onChange={(text) => setInput(text.target.value)}
-              placeholder="Token ID"
-              maxLength={4}
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-slate-500 text-xs font-bold mb-2">
-              Phone
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                placeholder="Select a Team"
-                value={phone}
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                }}
-              >
-                <option value="">Choose your Phone</option>
-                <option value='{ "width": 390, "height": 844 }'>
-                  iPhone 13/12
-                </option>
-                <option value='{ "width": 428, "height": 926 }'>
-                  iPhone 13/12 Max
-                </option>
-                <option value='{ "width": 375, "height": 812 }'>
-                  iPhone 13/12 Mini
-                </option>
-                <option value='{ "width": 375, "height": 667 }'>
-                  iPhone SE 2nd Gen
-                </option>
-                <option value='{ "width": 414, "height": 896 }'>
-                  iPhone 11/XR/XS
-                </option>
-                <option value='{ "width": 375, "height": 667 }'>
-                  iPhone 8
-                </option>
-                <option value='{ "width": 414, "height": 736 }'>
-                  iPhone 8 Plus
-                </option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
+    <>
+      <Helmet>
+        <title>Wallpaper | Crypto Skulls</title>
+        <meta
+          name="description"
+          content="Suit up your Phone with a custom wallpaper of your CryptoSkull!"
+        />
+      </Helmet>
+      <div className="bg-dark min-h-screen flex flex-col justify-center items-center px-3">
+        <h1 className="mb-4 text-6xl title text-center text-white sm:mb-6 md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
+          CS <span className="text-red-700">Wallpaper</span>
+        </h1>
+        {!generate ? (
+          <form className="w-full max-w-lg bg-zinc-800 rounded-lg py-6 px-3 flex flex-col justify-center shadow-md">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-slate-500 text-xs font-bold mb-2">
+                Skull ID
+              </label>
+              <input
+                className={`appearance-none block w-full bg-gray-200 placeholder-gray-800::placeholder text-gray-700 border ${
+                  error && "border-red-500"
+                }  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                type="text"
+                name="TokenID"
+                value={input}
+                onChange={(text) => setInput(text.target.value)}
+                placeholder="Token ID"
+                maxLength={4}
+              />
             </div>
-            {error && (
-              <p className="text-red-500 text-xs italic mt-2">{error}</p>
-            )}
-          </div>
-          <div>
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-slate-500 text-xs font-bold mb-2">
+                Phone
+              </label>
+              <div className="relative">
+                <select
+                  className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  placeholder="Select a Team"
+                  value={phone}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
+                >
+                  <option value="">Choose your Phone</option>
+                  <option value='{ "width": 390, "height": 844 }'>
+                    iPhone 13/12
+                  </option>
+                  <option value='{ "width": 428, "height": 926 }'>
+                    iPhone 13/12 Max
+                  </option>
+                  <option value='{ "width": 375, "height": 812 }'>
+                    iPhone 13/12 Mini
+                  </option>
+                  <option value='{ "width": 375, "height": 667 }'>
+                    iPhone SE 2nd Gen
+                  </option>
+                  <option value='{ "width": 414, "height": 896 }'>
+                    iPhone 11/XR/XS
+                  </option>
+                  <option value='{ "width": 375, "height": 667 }'>
+                    iPhone 8
+                  </option>
+                  <option value='{ "width": 414, "height": 736 }'>
+                    iPhone 8 Plus
+                  </option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+              {error && (
+                <p className="text-red-500 text-xs italic mt-2">{error}</p>
+              )}
+            </div>
+            <div>
+              <button
+                onClick={handleSearch}
+                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 ml-3 mt-4 rounded focus:outline-none focus:shadow-outline"
+                type="button"
+              >
+                {loading ? "Loading" : "Generate"}
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className="flex flex-col justify-center items-center w-full">
+            <div
+              className="flex justify-center scale-50 my-[-200px]"
+              style={{
+                fontFamily: "PressStart2P",
+              }}
+            >
+              <canvas ref={canvasRef} className=""></canvas>
+            </div>
             <button
-              onClick={handleSearch}
-              className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 ml-3 mt-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mt-4 rounded flex items-center mx-auto"
+              onClick={downloadImage}
             >
-              {loading ? "Loading" : "Generate"}
+              <svg
+                className="fill-current w-4 h-4 mr-2"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+              </svg>
+              <span>Download</span>
             </button>
-          </div>
-        </form>
-      ) : (
-        <div className="flex flex-col justify-center items-center w-full">
-          <div
-            className="flex justify-center scale-50 my-[-200px]"
-            style={{
-              fontFamily: "PressStart2P",
-            }}
-          >
-            <canvas ref={canvasRef} className=""></canvas>
-          </div>
-          <button
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mt-4 rounded flex items-center mx-auto"
-            onClick={downloadImage}
-          >
-            <svg
-              className="fill-current w-4 h-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
+            <p
+              className="text-red-600 font-mono underline mt-3 cursor-pointer"
+              onClick={reset}
             >
-              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-            </svg>
-            <span>Download</span>
-          </button>
-          <p
-            className="text-red-600 font-mono underline mt-3 cursor-pointer"
-            onClick={reset}
-          >
-            reset
+              reset
+            </p>
+          </div>
+        )}
+
+        <div className="flex items-center mt-4">
+          <p className="text-slate-500">Made with</p>
+          <HiHeart className="mx-2 text-red-600" />
+          <p className="text-slate-500">
+            by{" "}
+            <a
+              href="https://twitter.com/zmeyer44"
+              target="_blank"
+              rel="noreferrer"
+              className="text-red-600"
+            >
+              Zachm.eth
+            </a>
+            <span className="tech text-dark">!</span>
           </p>
         </div>
-      )}
 
-      <div className="flex items-center mt-4">
-        <p className="text-slate-500">Made with</p>
-        <HiHeart className="mx-2 text-red-600" />
-        <p className="text-slate-500">
-          by{" "}
-          <a
-            href="https://twitter.com/zmeyer44"
-            target="_blank"
-            rel="noreferrer"
-            className="text-red-600"
-          >
-            Zachm.eth
-          </a>
-          <span className="tech text-dark">!</span>
-        </p>
-      </div>
-
-      {/* <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
+        {/* <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
         <h1 className="font-mono text-xl">Must view on Desktop</h1>
       </div> */}
-    </div>
+      </div>
+    </>
   );
 }
 

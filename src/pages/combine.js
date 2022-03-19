@@ -148,7 +148,7 @@ function Combine() {
     <>
       <Helmet>
         <title>Combine | Crypto Skulls</title>
-        <meta name="description" content="Crypto Skulls generation" />
+        <meta name="description" content="Multi Pfp Skull Generator" />
       </Helmet>
       <div className="bg-dark min-h-screen flex flex-col justify-center items-center px-3">
         <h1 className="mb-4 text-6xl title text-center text-white sm:mb-6 md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
@@ -192,7 +192,7 @@ function Combine() {
               {count < 4 && (
                 <button
                   onClick={() => setCount(count + 1)}
-                  className="bg-zinc-300 hover:bg-zinc-400 text-zinc-600 py-2 px-4 ml-3 mt-4 rounded focus:outline-none focus:shadow-outline"
+                  className="bg-zinc-200 hover:bg-zinc-400 text-red-600 py-2 px-4 ml-3 mt-4 rounded focus:outline-none focus:shadow-outline"
                   type="button"
                 >
                   Add Skull

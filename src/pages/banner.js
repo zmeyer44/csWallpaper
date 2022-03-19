@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
 import { HiHeart } from "react-icons/hi";
 import { fetchEnsName } from "../utils";
 const wdts = require("../assets/wdts.png");
@@ -9,19 +10,6 @@ const skull2b = require("../assets/skull_2b.png");
 const cs = require("../assets/cs.png");
 const csw = require("../assets/cs_w.png");
 
-const lords = ["9", "19", "20", "24", "27", "36", "41", "42", "43", "70"];
-const lordsColors = {
-  9: "#324951",
-  19: "#324951",
-  20: "#000000",
-  24: "#000000",
-  27: "#000000",
-  36: "#000000",
-  41: "#000000",
-  42: "#c80008",
-  43: "#000000",
-  70: "#532cb3",
-};
 function Banner() {
   const [image, setImage] = useState(null);
   const [owner, setOwner] = useState("Loading...");
@@ -297,91 +285,100 @@ function Banner() {
   };
 
   return (
-    <div className="bg-dark min-h-screen flex flex-col justify-center items-center px-3">
-      <h1 className="mb-4 text-6xl title text-center text-white sm:mb-6 md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
-        CS <span className="text-red-700">Banner</span>
-      </h1>
-      {!generate ? (
-        <form className="w-full max-w-lg bg-zinc-800 rounded-lg py-6 px-3 flex flex-col justify-center shadow-md">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-slate-500 text-xs font-bold mb-2">
-              Skull ID
-            </label>
-            <input
-              className={`appearance-none block w-full bg-gray-200 placeholder-gray-800::placeholder text-gray-700 border ${
-                error && "border-red-500"
-              }  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
-              type="text"
-              name="TokenID"
-              value={input}
-              onChange={(text) => setInput(text.target.value)}
-              placeholder="Token ID"
-              maxLength={4}
-            />
-          </div>
+    <>
+      <Helmet>
+        <title>Banner | Crypto Skulls</title>
+        <meta
+          name="description"
+          content="Suit up your Twitter Banner with a custom wallpaper of your CryptoSkull!"
+        />
+      </Helmet>
+      <div className="bg-dark min-h-screen flex flex-col justify-center items-center px-3">
+        <h1 className="mb-4 text-6xl title text-center text-white sm:mb-6 md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
+          CS <span className="text-red-700">Banner</span>
+        </h1>
+        {!generate ? (
+          <form className="w-full max-w-lg bg-zinc-800 rounded-lg py-6 px-3 flex flex-col justify-center shadow-md">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-slate-500 text-xs font-bold mb-2">
+                Skull ID
+              </label>
+              <input
+                className={`appearance-none block w-full bg-gray-200 placeholder-gray-800::placeholder text-gray-700 border ${
+                  error && "border-red-500"
+                }  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                type="text"
+                name="TokenID"
+                value={input}
+                onChange={(text) => setInput(text.target.value)}
+                placeholder="Token ID"
+                maxLength={4}
+              />
+            </div>
 
-          <div>
+            <div>
+              <button
+                onClick={handleSearch}
+                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 ml-3 mt-4 rounded focus:outline-none focus:shadow-outline"
+                type="button"
+              >
+                {loading ? "Loading" : "Generate"}
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className="flex flex-col justify-center items-center w-full">
+            <div
+              className="flex justify-center scale-50 mt-[-140px] mb-[-120px]"
+              style={{
+                fontFamily: "PressStart2P",
+              }}
+            >
+              <canvas ref={canvasRef} className=""></canvas>
+            </div>
             <button
-              onClick={handleSearch}
-              className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 ml-3 mt-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mt-4 rounded flex items-center mx-auto"
+              onClick={downloadImage}
             >
-              {loading ? "Loading" : "Generate"}
+              <svg
+                className="fill-current w-4 h-4 mr-2"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+              </svg>
+              <span>Download</span>
             </button>
-          </div>
-        </form>
-      ) : (
-        <div className="flex flex-col justify-center items-center w-full">
-          <div
-            className="flex justify-center scale-50 mt-[-140px] mb-[-120px]"
-            style={{
-              fontFamily: "PressStart2P",
-            }}
-          >
-            <canvas ref={canvasRef} className=""></canvas>
-          </div>
-          <button
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mt-4 rounded flex items-center mx-auto"
-            onClick={downloadImage}
-          >
-            <svg
-              className="fill-current w-4 h-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
+            <p
+              className="text-red-600 font-mono underline mt-3 cursor-pointer"
+              onClick={reset}
             >
-              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-            </svg>
-            <span>Download</span>
-          </button>
-          <p
-            className="text-red-600 font-mono underline mt-3 cursor-pointer"
-            onClick={reset}
-          >
-            reset
+              reset
+            </p>
+          </div>
+        )}
+
+        <div className="flex items-center mt-4">
+          <p className="text-slate-500">Made with</p>
+          <HiHeart className="mx-2 text-red-600" />
+          <p className="text-slate-500">
+            by{" "}
+            <a
+              href="https://twitter.com/zmeyer44"
+              target="_blank"
+              rel="noreferrer"
+              className="text-red-600"
+            >
+              Zachm.eth
+            </a>
+            <span className="tech text-dark">!</span>
           </p>
         </div>
-      )}
-
-      <div className="flex items-center mt-4">
-        <p className="text-slate-500">Made with</p>
-        <HiHeart className="mx-2 text-red-600" />
-        <p className="text-slate-500">
-          by{" "}
-          <a
-            href="https://twitter.com/zmeyer44"
-            target="_blank"
-            rel="noreferrer"
-            className="text-red-600"
-          >
-            Zachm.eth
-          </a>
-          <span className="tech text-dark">!</span>
-        </p>
-      </div>
-      {/* <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
+        {/* <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
         <h1 className="font-mono text-xl">Must view on Desktop</h1>
       </div> */}
-    </div>
+      </div>
+    </>
   );
 }
 
