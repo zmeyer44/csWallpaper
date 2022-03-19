@@ -3,21 +3,10 @@ import { Link } from "react-router-dom";
 import { HiHeart } from "react-icons/hi";
 import { fetchEnsName } from "../utils";
 const skullNation = require("../assets/skullnation.png");
+const skullNationw = require("../assets/skullnation_w.png");
 const cs = require("../assets/cs.png");
+const csw = require("../assets/cs_w.png");
 
-const lords = ["9", "19", "20", "24", "27", "36", "41", "42", "43", "70"];
-const lordsColors = {
-  9: "#324951",
-  19: "#324951",
-  20: "#000000",
-  24: "#000000",
-  27: "#000000",
-  36: "#000000",
-  41: "#000000",
-  42: "#c80008",
-  43: "#000000",
-  70: "#532cb3",
-};
 function Index() {
   const [image, setImage] = useState(null);
   const [owner, setOwner] = useState("Loading...");
@@ -118,9 +107,16 @@ function Index() {
         }
         //CS Logo
         let csImage = new Image();
-        csImage.src = cs;
+        //Skull Nation
+        let skullNationImage = new Image();
+        if (sum < 301) {
+          csImage.src = csw;
+          skullNationImage.src = skullNationw;
+        } else {
+          csImage.src = cs;
+          skullNationImage.src = skullNation;
+        }
         csImage.onload = () => {
-          context.filter = sum < 301 ? "invert(1)" : null;
           context.drawImage(
             csImage,
             canvas.width - canvas.width * 0.1 - 35,
@@ -130,11 +126,7 @@ function Index() {
           );
         };
 
-        //Skull Nation
-        let skullNationImage = new Image();
-        skullNationImage.src = skullNation;
         skullNationImage.onload = () => {
-          context.filter = sum < 301 ? "invert(1)" : null;
           context.drawImage(
             skullNationImage,
             canvas.width * 0.15,

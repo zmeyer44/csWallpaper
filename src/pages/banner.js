@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { HiHeart } from "react-icons/hi";
 import { fetchEnsName } from "../utils";
 const wdts = require("../assets/wdts.png");
+const wdtsw = require("../assets/wdts_w.png");
 const skull1 = require("../assets/skull_1.png");
 const skull2 = require("../assets/skull_2.png");
 const skull2b = require("../assets/skull_2b.png");
 const cs = require("../assets/cs.png");
+const csw = require("../assets/cs_w.png");
 
 const lords = ["9", "19", "20", "24", "27", "36", "41", "42", "43", "70"];
 const lordsColors = {
@@ -204,16 +206,19 @@ function Banner() {
 
         //WDTS
         let wd = new Image();
-        wd.src = wdts;
-        wd.onload = () => {
-          context.filter = sum < 301 ? "invert(1)" : null;
-          context.drawImage(wd, 540, 420, 420, 60);
-        };
         //CS Logo
         let csImage = new Image();
-        csImage.src = cs;
+        if (sum < 301) {
+          wd.src = wdtsw;
+          csImage.src = csw;
+        } else {
+          wd.src = wdts;
+          csImage.src = cs;
+        }
+        wd.onload = () => {
+          context.drawImage(wd, 540, 420, 420, 60);
+        };
         csImage.onload = () => {
-          context.filter = sum < 301 ? "invert(1)" : null;
           context.drawImage(csImage, 1410, 410, 70, 70);
         };
         //Text
