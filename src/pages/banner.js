@@ -220,7 +220,15 @@ function Banner() {
         context.fillStyle = sum < 301 ? "#ffffff" : "#212121";
         context.font = `25px 'PressStart2P'`;
         context.fillText(`CRYPTO SKULL #${input}`, 20, 45);
-        context.fillText(`OWNER: ${owner}`, 950, 45);
+        if (owner.length > 20) {
+          context.fillText(
+            `OWNER: ${owner?.slice(0, 4)}...${owner?.slice(-4)}`,
+            950,
+            45
+          );
+        } else {
+          context.fillText(`OWNER: ${owner}`, 950, 45);
+        }
       };
     }
   }, [generate, owner]);
@@ -250,6 +258,7 @@ function Banner() {
       .then(async (response) => {
         download(response.image_url);
         setError(null);
+        setOwner(response.owner.address);
         return await fetchEnsName(response.owner.address);
       })
       .then((name) => setOwner(name))

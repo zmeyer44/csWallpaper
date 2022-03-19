@@ -103,11 +103,19 @@ function Index() {
           15,
           canvas.height * 0.36 + canvas.width * 0.84 + 50
         );
-        context.fillText(
-          owner,
-          15,
-          canvas.height * 0.36 + canvas.width * 0.84 + 82
-        );
+        if (owner.length > 20) {
+          context.fillText(
+            `${owner?.slice(0, 4)}...${owner?.slice(-4)}`,
+            15,
+            canvas.height * 0.36 + canvas.width * 0.84 + 82
+          );
+        } else {
+          context.fillText(
+            owner,
+            15,
+            canvas.height * 0.36 + canvas.width * 0.84 + 82
+          );
+        }
         //CS Logo
         let csImage = new Image();
         csImage.src = cs;
@@ -165,6 +173,7 @@ function Index() {
       .then(async (response) => {
         download(response.image_url);
         setError(null);
+        setOwner(response.owner.address);
         return await fetchEnsName(response.owner.address);
       })
       .then((name) => setOwner(name))
@@ -227,7 +236,7 @@ function Index() {
             </label>
             <div className="relative">
               <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 placeholder="Select a Team"
                 value={phone}
                 onChange={(e) => {
@@ -329,9 +338,7 @@ function Index() {
           <span className="tech text-dark">!</span>
         </p>
       </div>
-      <div className="absolute top-0 right-0 text-red-500 hover:text-white font-mono pt-4 pr-4">
-        <Link to="/banner">Create Twitter Banner</Link>
-      </div>
+
       {/* <div className="flex md:hidden justify-center items-center text-red-600 fixed top-0 bottom-0 left-0 right-0 bg-zinc-900 z-50">
         <h1 className="font-mono text-xl">Must view on Desktop</h1>
       </div> */}
