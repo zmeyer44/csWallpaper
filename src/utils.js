@@ -8,7 +8,7 @@ export async function fetchEnsName(address) {
     const res = await provider.lookupAddress(address);
 
     if (res) {
-      return res.charAt(0).toUpperCase() + res.slice(1, 14);
+      return res.charAt(0).toUpperCase() + res.slice(1, 19);
     } else {
       return `${address?.slice(0, 4)}...${address?.slice(-4)}`;
     }

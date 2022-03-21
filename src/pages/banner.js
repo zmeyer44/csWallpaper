@@ -214,13 +214,18 @@ function Banner() {
         context.font = `25px 'PressStart2P'`;
         context.fillText(`CRYPTO SKULL #${input}`, 20, 45);
         if (owner.length > 20) {
+          var textWidth = context.measureText(
+            `OWNER: ${owner?.slice(0, 4)}...${owner?.slice(-4)}`
+          ).width;
+
           context.fillText(
             `OWNER: ${owner?.slice(0, 4)}...${owner?.slice(-4)}`,
-            950,
+            1480 - textWidth,
             45
           );
         } else {
-          context.fillText(`OWNER: ${owner}`, 950, 45);
+          var textWidth = context.measureText(`OWNER: ${owner}`).width;
+          context.fillText(`OWNER: ${owner}`, 1480 - textWidth, 45);
         }
       };
     }
