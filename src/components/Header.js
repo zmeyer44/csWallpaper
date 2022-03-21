@@ -45,9 +45,14 @@ const Header = () => {
           menuOpen && "translate-x-0"
         }`}
       >
-        <HeaderLink label="Wallpaper" href="/" large />
-        <HeaderLink label="Banner" href="/banner" large />
-        <HeaderLink label="Combine" href="/combine" large />
+        <HeaderLink label="Wallpaper" href="/" large onClick={toggleMenu} />
+        <HeaderLink label="Banner" href="/banner" large onClick={toggleMenu} />
+        <HeaderLink
+          label="Combine"
+          href="/combine"
+          large
+          onClick={toggleMenu}
+        />
       </nav>
     </header>
   );

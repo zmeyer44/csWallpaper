@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-const HeaderLink = ({ label, href, hidden = false, large }) => {
+const HeaderLink = ({ label, href, hidden = false, large, onClick }) => {
   return (
-    <NavLink to={href} className="text-black/60 hover:text-black ">
+    <NavLink
+      to={href}
+      className="text-black/60 hover:text-black "
+      onClick={onClick}
+    >
       <div
         className={`${
           hidden && "hidden md:inline-flex"
