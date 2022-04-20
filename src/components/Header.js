@@ -25,13 +25,15 @@ const Header = () => {
       </div>
 
       <div className="flex items-center">
-        <div className="hidden sm:flex space-x-8 pr-4">
+        <div className="hidden lg:flex space-x-8 pr-4">
           <HeaderLink label="Wallpaper" href="/" />
           <HeaderLink label="Banner" href="/banner" />
           <HeaderLink label="Combine" href="/combine" />
+          <HeaderLink label="oG x Demonic" href="/ogxdemonic" />
+          <HeaderLink label="Demonic Combine" href="/demonic-combine" />
         </div>
         <button
-          className={`menu ${menuOpen} z-20 sm:hidden`}
+          className={`menu ${menuOpen} z-20 lg:hidden`}
           onClick={toggleMenu}
         >
           <div className="">
@@ -50,6 +52,18 @@ const Header = () => {
         <HeaderLink
           label="Combine"
           href="/combine"
+          large
+          onClick={toggleMenu}
+        />
+        <HeaderLink
+          label="oG x Demonic"
+          href="/ogxdemonic"
+          large
+          onClick={toggleMenu}
+        />
+        <HeaderLink
+          label="Demonic Combine"
+          href="/demonic-combine"
           large
           onClick={toggleMenu}
         />
