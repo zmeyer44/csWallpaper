@@ -32,7 +32,7 @@ function Combine() {
             ds,
             ds.width / 2,
             67,
-            ds.width / 2,
+            (ds.width - 62) / 2,
             ds.height - 62,
             canvas.width / 2,
             0,
