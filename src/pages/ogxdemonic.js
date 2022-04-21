@@ -31,9 +31,9 @@ function Combine() {
           context.drawImage(
             ds,
             ds.width / 2,
-            55,
+            67,
             ds.width / 2,
-            ds.height - 60,
+            ds.height - 62,
             canvas.width / 2,
             0,
             canvas.width / 2,
